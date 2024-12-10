@@ -1,4 +1,64 @@
 .landing-page {
+	text-align: center;
+	color: bisque;
+	
 	h1 {
+		font-size: 60px;
+		font-family:Georgia, 'Times New Roman', Times, serif;
+		font-weight: 600;
+		padding-top: 200px;
 	}
+
+	p{
+		font-size: 10px;
+	}
+
+	button{
+		background-color: rgb(151, 151, 151);
+		padding: 5px 8px;
+		border-radius: 20px;
+		margin-top: 30px;
+		font-size: 20px;
+		font-weight:800;
+		color: black;
+		transition: 0.3s ease;
+		
+	}
+
+
+}
+
+.landing-page button:hover{
+	background-color: bisque;
+	scale: 1.03;
+	transition: 0.3s ease;
+	box-shadow: rgba(183, 183, 183, 0.35) 0px 5px 15px;
+}
+
+
+.landing-page-img{
+	height: 300px;
+	transition: 0.3s ease;
+} 
+
+.landing-page-img:hover{
+	scale: 1.05;
+	transition: 0.3s ease;
+}
+
+
+.landing-page-img-1{
+	height: 400px;
+	position: absolute;
+	top: 200px;
+	right: 68%;
+	rotate: (-20deg);
+
+}
+.landing-page-img-2{
+	position: absolute;
+	right: 0;
+	top: 300px;
+	rotate: (30deg);
+	border-radius: 20px;
 }
