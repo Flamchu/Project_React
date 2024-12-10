@@ -18,7 +18,7 @@ const GameCanvas = () => {
 
 	return (
 		<div tabIndex={0} onKeyDown={handleKeyDown} className="w-screen h-screen outline-none relative bg-gray-200">
-			<h1 className="absolute top-0 left-0 p-4">{area.name}</h1>
+			<h1 className="absolute top-0 left-0 p-4">{area?.name || "Loading..."}</h1>
 			<div className="relative w-full h-full">
 				<Player position={playerPosition} />
 				{currentTasks.map((task) =>
