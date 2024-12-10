@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import GameCanvas from "./components/GameCanvas";
 import useGameState from "./state/useGameState";
 import "./App.scss";
@@ -7,25 +7,29 @@ import vareny from "./assets/pernik-vareny.png";
 
 const App = () => {
 	const loadGameData = useGameState((state) => state.loadGameData);
+	const [isGameLoaded, setIsGameLoaded] = useState(false);
 
 	useEffect(() => {
 		loadGameData();
 	}, [loadGameData]);
 
-	function loadGameCanvas() {
-		return <GameCanvas />;
+	const loadGameCanvas = () => {
+		setIsGameLoaded(true); // switch to game canvas
+	};
+
+	if (isGameLoaded) {
+		return <GameCanvas />; // render canvas on button click
 	}
 
+	// landing page
 	return (
-		<>
-			<div className="landing-page">
-				<h1>Vítejte ve Světě Perníku</h1>
-				<p>toto je tvá poslední šance odejít</p>
-				<button onClick={loadGameCanvas}>Jdu na to!</button>
-				<img src={vareny} alt="" className="landing-page-img landing-page-img-1" />
-				<img src={peceny} alt="" className="landing-page-img landing-page-img-2" />
-			</div>
-		</>
+		<div className="landing-page">
+			<h1>Vítejte ve Světě Perníku</h1>
+			<p>Toto je tvá poslední šance odejít</p>
+			<button onClick={loadGameCanvas}>Jdu na to!</button>
+			<img src={vareny} alt="Perník vařený" className="landing-page-img landing-page-img-1" />
+			<img src={peceny} alt="Perník pečený" className="landing-page-img landing-page-img-2" />
+		</div>
 	);
 };
 
