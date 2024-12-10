@@ -1,10 +1,19 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import useGameState from "../state/useGameState";
 import Player from "./Player";
 
 const GameCanvas = () => {
 	const { currentArea, playerPosition, areas, movePlayer, transitionArea, tasks } = useGameState();
+	const canvasRef = useRef<HTMLDivElement>(null);
 
+	// focus the canvas when it renders
+	useEffect(() => {
+		if (canvasRef.current) {
+			canvasRef.current.focus();
+		}
+	}, []);
+
+	// handle movement
 	const handleKeyDown = (e: React.KeyboardEvent) => {
 		if (e.key === "ArrowUp") movePlayer("up");
 		if (e.key === "ArrowDown") movePlayer("down");
@@ -13,11 +22,17 @@ const GameCanvas = () => {
 		transitionArea();
 	};
 
+	// define area
 	const area = areas[currentArea];
 	const currentTasks = tasks[currentArea] || [];
 
 	return (
-		<div tabIndex={0} onKeyDown={handleKeyDown} className="w-screen h-screen outline-none relative bg-gray-200">
+		<div
+			ref={canvasRef}
+			tabIndex={0} // makes div focusable
+			onKeyDown={handleKeyDown}
+			className="w-screen h-screen outline-none relative bg-gray-200"
+		>
 			<h1 className="absolute top-0 left-0 p-4">{area?.name || "Loading..."}</h1>
 			<div className="relative w-full h-full">
 				<Player position={playerPosition} />
