@@ -1,10 +1,17 @@
+import { useEffect } from "react";
+import GameCanvas from "./components/GameCanvas";
+import useGameState from "./state/useGameState";
 import './App.scss'
 import peceny from "./assets/pernik_peceny.jpg"
 import vareny from "./assets/pernik-vareny.png"
 
 
-function App() {
+const App = () => {
+	const loadGameData = useGameState((state) => state.loadGameData);
 
+	useEffect(() => {
+		loadGameData();
+	}, [loadGameData]);
   return (
     <>
       <div className='landing-page'>
@@ -19,4 +26,7 @@ function App() {
   )
 }
 
-export default App
+	return <GameCanvas />;
+};
+
+export default App;
