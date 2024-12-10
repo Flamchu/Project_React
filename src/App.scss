@@ -1,26 +1,30 @@
 .landing-page {
 	text-align: center;
-	color: bisque;
+	color: rgb(255, 191, 73);
 	
 	h1 {
 		font-size: 60px;
 		font-family:Georgia, 'Times New Roman', Times, serif;
 		font-weight: 600;
 		padding-top: 200px;
+	filter: drop-shadow(0 0 0.75rem rgb(0, 0, 0));
+
 	}
 
 	p{
 		font-size: 10px;
+	filter: drop-shadow(0 0 0.75rem rgb(0, 0, 0));
+
 	}
 
 	button{
-		background-color: rgb(151, 151, 151);
+		background-color: rgb(255, 191, 73);
 		padding: 5px 8px;
 		border-radius: 20px;
 		margin-top: 30px;
 		font-size: 20px;
 		font-weight:800;
-		color: black;
+		color: #2596be;
 		transition: 0.3s ease;
 		
 	}

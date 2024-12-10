@@ -2,14 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-$color1: #202020; // Světlejší šedá
-$color2: #000000; // Tmavší šedá
 
 body {
 	margin: 0;
 	width: 100%; // Šířka elementu
 	height: 100vh; // Výška na celou obrazovku
-	background: linear-gradient(to bottom, $color1, $color2); // Přechod zhora dolů
+	background-image: (url("./assets/background.svg"));
+	background-size: cover;
 	overflow-x: hidden;
 
 }
