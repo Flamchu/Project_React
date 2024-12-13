@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import useGameState from "../state/useGameState";
 import Player from "./Player";
 
@@ -9,6 +9,8 @@ const GameCanvas = () => {
 	const backgroundImage = "url('../../fotky-pro-Erika/hlavak.png')";
 	const jelen = "url('../../fotky-pro-Erika/jelen.png')";
 
+	const [isModalOpen, setIsModalOpen] = useState(true);
+	
 	// focus the canvas when it renders
 	useEffect(() => {
 		if (canvasRef.current) {
@@ -57,6 +59,21 @@ const GameCanvas = () => {
 					backgroundRepeat: "no-repeat",
 				}}
 			></div>
+
+		{isModalOpen && (
+          <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center bg-gray-500 bg-opacity-50">
+            <div className="bg-white p-6 rounded shadow-lg" onClick={(e) => e.stopPropagation()}>
+              <h2 className="text-xl font-bold">Jelen</h2>
+              <p>Úžasný jelen se ti ukázal!</p>
+              <button
+                className="mt-4 p-2 bg-blue-500 text-white rounded"
+                onClick={() => setIsModalOpen(false)} // Close the modal
+              >
+                Zavřít
+              </button>
+            </div>
+          </div>
+        )}
 
 				<Player position={playerPosition} />
 				{currentTasks.map((task) =>
