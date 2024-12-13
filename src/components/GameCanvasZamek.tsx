@@ -6,6 +6,8 @@ const GameCanvas = () => {
 	const { currentArea, playerPosition, areas, movePlayer, transitionArea, tasks } = useGameState();
 	const canvasRef = useRef<HTMLDivElement>(null);
 
+	const backgroundImage = "url('../../fotky-pro-Erika/zamek.png')";
+
 	// focus the canvas when it renders
 	useEffect(() => {
 		if (canvasRef.current) {
@@ -32,6 +34,11 @@ const GameCanvas = () => {
 			tabIndex={0} // makes div focusable
 			onKeyDown={handleKeyDown}
 			className="w-screen h-screen outline-none relative bg-gray-200"
+			style={{
+				backgroundImage: backgroundImage, // zde přidáme obrázek jako pozadí
+				backgroundSize: "cover", // obrázek pokryje celé pozadí
+				backgroundPosition: "center", // zarovnání pozadí na střed
+			  }}
 		>
 			<h1 className="absolute top-0 left-0 p-4">{area?.name || "Loading..."}</h1>
 			<div className="relative w-full h-full">

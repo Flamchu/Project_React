@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import GameCanvas from "./components/GameCanvas";
+import GameCanvas from "./components/GameCanvasHlavak";
 import useGameState from "./state/useGameState";
 import "./App.scss";
 import peceny from "./assets/pernik_peceny.jpg";
