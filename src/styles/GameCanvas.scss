@@ -1,0 +1,39 @@
+.game-canvas {
+	position: relative;
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	overflow: hidden;
+}
+
+.player {
+	position: absolute;
+	width: 50px;
+	height: 50px;
+	background-color: #3498db; /* Blue color for the player */
+	border-radius: 50%;
+	transition: left 0.1s linear, top 0.1s linear; /* Smooth movement */
+}
+
+.area-name {
+	position: absolute;
+	top: 20px;
+	left: 50%;
+	transform: translateX(-50%);
+	padding: 8px 12px;
+	background-color: rgba(0, 0, 0, 0.5);
+	color: white;
+	font-size: 18px;
+	border-radius: 8px;
+}
+
+.transition-point {
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	background-color: rgba(0, 255, 0, 0.5); /* Light green with transparency */
+	border: 2px solid rgba(0, 255, 0, 1); /* Border to make it stand out */
+}

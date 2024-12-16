@@ -1,22 +1,38 @@
 {
 	"areas": [
 		{
-			"id": "square",
-			"name": "Main Square",
-			"transitionPoints": [{ "x": 10, "y": 5, "targetArea": "park" }]
+			"id": "delta-skola",
+			"name": "Delta škola",
+			"transitionPoints": [{ "x": 10, "y": 5, "targetArea": "dubina" }]
 		},
 		{
-			"id": "park",
-			"name": "Park",
-			"transitionPoints": [{ "x": 0, "y": 5, "targetArea": "square" }]
+			"id": "dubina",
+			"name": "Dubina",
+			"transitionPoints": [
+				{ "x": 0, "y": 5, "targetArea": "delta-skola" },
+				{ "x": 10, "y": 5, "targetArea": "hlavak" }
+			]
+		},
+		{
+			"id": "hlavak",
+			"name": "Hlavák",
+			"transitionPoints": [
+				{ "x": 0, "y": 5, "targetArea": "dubina" },
+				{ "x": 10, "y": 5, "targetArea": "zamek" }
+			]
+		},
+		{
+			"id": "zamek",
+			"name": "Zámek",
+			"transitionPoints": [
+				{ "x": 0, "y": 5, "targetArea": "hlavak" },
+				{ "x": 10, "y": 5, "targetArea": "dum-senioru" }
+			]
+		},
+		{
+			"id": "dum-senioru",
+			"name": "Dům seniorů",
+			"transitionPoints": [{ "x": 0, "y": 5, "targetArea": "zamek" }]
 		}
-	],
-	"tasks": {
-		"square": [{ "id": 1, "description": "Talk to the NPC", "completed": false }],
-		"park": [{ "id": 2, "description": "Collect the flower", "completed": false }]
-	},
-	"player": {
-		"position": { "x": 5, "y": 5 },
-		"currentArea": "square"
-	}
+	]
 }

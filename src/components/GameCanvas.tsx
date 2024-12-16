@@ -1,56 +1,83 @@
-import React, { useRef, useEffect } from "react";
+import { useEffect } from "react";
 import useGameState from "../state/useGameState";
-import Player from "./Player";
+import "../styles/GameCanvas.scss";
 
 const GameCanvas = () => {
-	const { currentArea, playerPosition, areas, movePlayer, transitionArea, tasks } = useGameState();
-	const canvasRef = useRef<HTMLDivElement>(null);
+	const playerPosition = useGameState((state) => state.playerPosition);
+	const backgroundImage = useGameState((state) => state.backgroundImage);
+	const areas = useGameState((state) => state.areas);
+	const currentArea = useGameState((state) => state.currentArea);
+	const movePlayer = useGameState((state) => state.movePlayer);
+	const transitionArea = useGameState((state) => state.transitionArea);
 
-	// focus the canvas when it renders
+	// Get the transition points for the current area
+	const transitionPoints = areas[currentArea]?.transitionPoints || [];
+
+	// Handle keypress for movement
 	useEffect(() => {
-		if (canvasRef.current) {
-			canvasRef.current.focus();
-		}
-	}, []);
+		const handleKeyDown = (event: KeyboardEvent) => {
+			switch (event.key) {
+				case "ArrowUp":
+					movePlayer("up");
+					break;
+				case "ArrowDown":
+					movePlayer("down");
+					break;
+				case "ArrowLeft":
+					movePlayer("left");
+					break;
+				case "ArrowRight":
+					movePlayer("right");
+					break;
+				default:
+					break;
+			}
+		};
 
-	// handle movement
-	const handleKeyDown = (e: React.KeyboardEvent) => {
-		if (e.key === "ArrowUp") movePlayer("up");
-		if (e.key === "ArrowDown") movePlayer("down");
-		if (e.key === "ArrowLeft") movePlayer("left");
-		if (e.key === "ArrowRight") movePlayer("right");
+		window.addEventListener("keydown", handleKeyDown);
+		return () => window.removeEventListener("keydown", handleKeyDown);
+	}, [movePlayer]);
+
+	// Trigger area transition when player reaches a transition point
+	useEffect(() => {
 		transitionArea();
-	};
+	}, [playerPosition, transitionArea]);
 
-	// define area
-	const area = areas[currentArea];
-	const currentTasks = tasks[currentArea] || [];
+	// Calculate position based on grid (e.g., 50px per grid unit)
+	const gridSize = 50; // This is the size of the grid, adjust as necessary
 
 	return (
 		<div
-			ref={canvasRef}
-			tabIndex={0} // makes div focusable
-			onKeyDown={handleKeyDown}
-			className="w-screen h-screen outline-none relative bg-gray-200"
+			className="game-canvas"
+			style={{
+				backgroundImage: `url(${backgroundImage})`, // Dynamically set background
+				backgroundSize: "cover",
+				backgroundPosition: "center",
+			}}
 		>
-			<h1 className="absolute top-0 left-0 p-4">{area?.name || "Loading..."}</h1>
-			<div className="relative w-full h-full">
-				<Player position={playerPosition} />
-				{currentTasks.map((task) =>
-					!task.completed ? (
-						<div
-							key={task.id}
-							className="absolute bg-green-500 text-white text-xs p-1 rounded"
-							style={{
-								top: `${task.id * 20}px`,
-								left: "50%",
-							}}
-						>
-							{task.description}
-						</div>
-					) : null
-				)}
-			</div>
+			{/* Render the player */}
+			<div
+				className="player"
+				style={{
+					left: `${playerPosition.x * gridSize}px`, // Scale position based on grid size
+					top: `${playerPosition.y * gridSize}px`,
+				}}
+			/>
+
+			{/* Render transition points as circles */}
+			{transitionPoints.map((point, index) => (
+				<div
+					key={index}
+					className="transition-point"
+					style={{
+						left: `${point.x * gridSize}px`, // Position transition points based on grid
+						top: `${point.y * gridSize}px`,
+					}}
+				/>
+			))}
+
+			{/* Render the area name */}
+			<div className="area-name">{areas[currentArea]?.name}</div>
 		</div>
 	);
 };
