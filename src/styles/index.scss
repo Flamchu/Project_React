@@ -2,12 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-
 body {
 	margin: 0;
 	width: 100%; // Šířka elementu
 	height: 100vh; // Výška na celou obrazovku
-	background-image: (url("./assets/background.svg"));
+	background-image: (url("../assets/background.svg"));
 	background-size: cover;
 	overflow-x: hidden;
 }

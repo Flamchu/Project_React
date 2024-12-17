@@ -38,7 +38,7 @@ const useGameState = create<GameState>((set, get) => ({
 	backgroundImage: new URL("../assets/areas/delta-skola.png", import.meta.url).href, // Use dynamic import for default image
 	movePlayer: (direction) => {
 		const { playerPosition } = get();
-		const step = 10; // Movement in pixels
+		const step = 1; // Movement in pixels
 		const newPos = { ...playerPosition };
 
 		if (direction === "up") newPos.y = Math.max(0, newPos.y - step);

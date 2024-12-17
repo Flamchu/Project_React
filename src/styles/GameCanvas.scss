@@ -12,9 +12,27 @@
 	position: absolute;
 	width: 50px;
 	height: 50px;
-	background-color: #3498db; /* Blue color for the player */
-	border-radius: 50%;
-	transition: left 0.1s linear, top 0.1s linear; /* Smooth movement */
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+	transition: left 0.1s linear, top 0.1s linear;
+}
+
+/* Sprites for walking directions */
+.player-up {
+	background-image: url("../assets/vektor.png");
+}
+
+.player-down {
+	background-image: url("../assets/vektor.png");
+}
+
+.player-left {
+	background-image: url("../assets/vektor.png");
+}
+
+.player-right {
+	background-image: url("../assets/vektor.png");
 }
 
 .area-name {
@@ -34,6 +52,6 @@
 	width: 20px;
 	height: 20px;
 	border-radius: 50%;
-	background-color: rgba(0, 255, 0, 0.5); /* Light green with transparency */
-	border: 2px solid rgba(0, 255, 0, 1); /* Border to make it stand out */
+	background-color: rgba(0, 255, 0, 0.5);
+	border: 2px solid rgba(0, 255, 0, 1);
 }

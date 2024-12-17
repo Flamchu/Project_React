@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import useGameState from "../state/useGameState";
 import "../styles/GameCanvas.scss";
 
@@ -10,6 +10,9 @@ const GameCanvas = () => {
 	const movePlayer = useGameState((state) => state.movePlayer);
 	const transitionArea = useGameState((state) => state.transitionArea);
 
+	// State to handle player sprite
+	const [spriteDirection, setSpriteDirection] = useState("down"); // Default direction
+
 	// Get the transition points for the current area
 	const transitionPoints = areas[currentArea]?.transitionPoints || [];
 
@@ -19,15 +22,19 @@ const GameCanvas = () => {
 			switch (event.key) {
 				case "ArrowUp":
 					movePlayer("up");
+					setSpriteDirection("up");
 					break;
 				case "ArrowDown":
 					movePlayer("down");
+					setSpriteDirection("down");
 					break;
 				case "ArrowLeft":
 					movePlayer("left");
+					setSpriteDirection("left");
 					break;
 				case "ArrowRight":
 					movePlayer("right");
+					setSpriteDirection("right");
 					break;
 				default:
 					break;
@@ -44,33 +51,33 @@ const GameCanvas = () => {
 	}, [playerPosition, transitionArea]);
 
 	// Calculate position based on grid (e.g., 50px per grid unit)
-	const gridSize = 50; // This is the size of the grid, adjust as necessary
+	const gridSize = 50; // Size of one grid cell in pixels
 
 	return (
 		<div
 			className="game-canvas"
 			style={{
-				backgroundImage: `url(${backgroundImage})`, // Dynamically set background
+				backgroundImage: `url(${backgroundImage})`,
 				backgroundSize: "cover",
 				backgroundPosition: "center",
 			}}
 		>
 			{/* Render the player */}
 			<div
-				className="player"
+				className={`player player-${spriteDirection}`} // Add class for sprite direction
 				style={{
-					left: `${playerPosition.x * gridSize}px`, // Scale position based on grid size
+					left: `${playerPosition.x * gridSize}px`,
 					top: `${playerPosition.y * gridSize}px`,
 				}}
 			/>
 
-			{/* Render transition points as circles */}
+			{/* Render transition points */}
 			{transitionPoints.map((point, index) => (
 				<div
 					key={index}
 					className="transition-point"
 					style={{
-						left: `${point.x * gridSize}px`, // Position transition points based on grid
+						left: `${point.x * gridSize}px`,
 						top: `${point.y * gridSize}px`,
 					}}
 				/>
